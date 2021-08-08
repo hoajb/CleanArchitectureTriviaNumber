@@ -34,7 +34,7 @@ internal class UseCaseGetConcreteNumberTriviaTest {
     fun `should return numberTrivia success from the repository`() =
         runBlockingTest {
             //Arrange
-            val number = 1
+            val number = 1.0
             val numberTrivia = NumberTrivia(
                 text = "SomeText",
                 number = number,
@@ -59,7 +59,7 @@ internal class UseCaseGetConcreteNumberTriviaTest {
     fun `should return Failure from the repository`() =
         runBlockingTest {
             //Arrange
-            val number = 1
+            val number = 1.0
             val failure = FailureNumberTriviaNotFound()
             coEvery { repository.getConcreteNumberTrivia(number) } returns Either.Left(
                 failure

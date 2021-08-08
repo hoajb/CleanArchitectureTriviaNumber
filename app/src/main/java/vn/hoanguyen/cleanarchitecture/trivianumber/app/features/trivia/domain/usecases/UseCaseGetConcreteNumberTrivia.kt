@@ -12,7 +12,7 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.UseCase
 class UseCaseGetConcreteNumberTrivia(
     private val numberTriviaRepository: NumberTriviaRepository,
 ) : UseCase<NumberTrivia, UseCaseGetConcreteNumberTrivia.Params>() {
-    data class Params(val number: Int)
+    data class Params(val number: Double)
 
     override suspend fun run(params: Params): Either<IFailure, NumberTrivia> {
         return numberTriviaRepository.getConcreteNumberTrivia(params.number)
