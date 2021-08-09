@@ -9,11 +9,12 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.core.exception.IFailure
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.functional.Either
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.platform.NetworkInfo
 import java.io.IOException
+import javax.inject.Inject
 
 /**
  * Created by Hoa Nguyen on Aug 08 2021.
  */
-class NumberTriviaRepositoryImpl(
+class NumberTriviaRepositoryImpl @Inject constructor(
     private val remoteDataSource: NumberTriviaRemoteDataSource,
     private val localDataSource: NumberTriviaLocalDataSource,
     private val networkInfo: NetworkInfo

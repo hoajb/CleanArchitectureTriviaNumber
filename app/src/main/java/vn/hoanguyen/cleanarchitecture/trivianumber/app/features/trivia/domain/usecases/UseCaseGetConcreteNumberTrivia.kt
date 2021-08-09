@@ -5,11 +5,12 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.domain.re
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.exception.IFailure
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.functional.Either
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.UseCase
+import javax.inject.Inject
 
 /**
  * Created by Hoa Nguyen on Aug 06 2021.
  */
-class UseCaseGetConcreteNumberTrivia (
+class UseCaseGetConcreteNumberTrivia @Inject constructor(
     private val numberTriviaRepository: NumberTriviaRepository,
 ) : UseCase<NumberTrivia, UseCaseGetConcreteNumberTrivia.Params>() {
     data class Params(val number: Double)

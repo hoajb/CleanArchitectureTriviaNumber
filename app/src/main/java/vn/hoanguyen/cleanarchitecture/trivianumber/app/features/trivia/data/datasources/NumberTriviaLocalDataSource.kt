@@ -7,7 +7,7 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.data.mode
  */
 interface NumberTriviaLocalDataSource {
     /**
-     * Gets the cached [NumberTriviaDto] which was gotten the lasttime the user has an internet connection
+     * Gets the cached [NumberTriviaDto] which was gotten the last time the user has an internet connection
      * Throws a [CachedException] if no cached data is present
      */
     suspend fun getConcreteNumberTrivia(number: Double): NumberTriviaDto
