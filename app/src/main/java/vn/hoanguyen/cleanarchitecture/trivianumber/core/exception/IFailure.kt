@@ -10,9 +10,12 @@ package vn.hoanguyen.cleanarchitecture.trivianumber.core.exception
  * Every feature specific failure should extend [FeatureFailure] class.
  */
 sealed class IFailure {
-    object NetworkConnection : IFailure()
-    object ServerError : IFailure()
+    object NetworkConnectionFailure : IFailure()
 
     /** * Extend this class for feature specific failures.*/
     abstract class FeatureFailure : IFailure()
+
+    data class ServerFailure(val messageError: String = "") : IFailure()
+
+    object CacheFailure : IFailure()
 }

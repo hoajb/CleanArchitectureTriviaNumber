@@ -9,7 +9,7 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.UseCase
 /**
  * Created by Hoa Nguyen on Aug 06 2021.
  */
-class UseCaseGetConcreteNumberTrivia(
+class UseCaseGetConcreteNumberTrivia (
     private val numberTriviaRepository: NumberTriviaRepository,
 ) : UseCase<NumberTrivia, UseCaseGetConcreteNumberTrivia.Params>() {
     data class Params(val number: Double)
