@@ -93,4 +93,35 @@ internal class NumberTriviaLocalSharePreferencesDataSourceImplTest {
             }
         }
     }
+
+    @Nested
+    inner class CacheNumberTrivia {
+        @Test
+        fun `should call share preferences to save number trivia`() =
+            runBlockingTest {
+                //Arrange
+                val tNumber = 1.0
+                val tNumberTriviaDto = NumberTriviaDto(
+                    text = "Number Test",
+                    number = tNumber,
+                    found = true,
+                    type = "trivia"
+                )
+
+                val jsonString = tNumberTriviaDto.toString()
+
+                every {
+                    gson.toJson(tNumberTriviaDto)
+                } returns jsonString
+                //Act
+                val model = dataSource.cacheNumberTrivia(tNumberTriviaDto)
+                //Assert
+                verify {
+                    sharedPreferences.edit().putString(
+                        NumberTriviaLocalSharePreferencesDataSourceImpl.NUMBER_TRIVIA_LOCAL_PREF_KEY,
+                        jsonString
+                    ).apply()
+                }
+            }
+    }
 }

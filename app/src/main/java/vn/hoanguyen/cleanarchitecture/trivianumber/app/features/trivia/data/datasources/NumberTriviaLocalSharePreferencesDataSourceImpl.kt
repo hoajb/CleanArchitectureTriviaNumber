@@ -29,7 +29,7 @@ class NumberTriviaLocalSharePreferencesDataSourceImpl @Inject constructor(
     }
 
     override suspend fun cacheNumberTrivia(itemToCache: NumberTriviaDto) {
-        //Fixme
+        sharePreferences.edit().putString(NUMBER_TRIVIA_LOCAL_PREF_KEY, gson.toJson(itemToCache)).apply()
     }
 
     companion object {

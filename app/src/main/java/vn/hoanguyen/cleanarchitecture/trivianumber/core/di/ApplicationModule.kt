@@ -1,14 +1,21 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber.core.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import vn.hoanguyen.cleanarchitecture.trivianumber.BuildConfig
+import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.data.datasources.NumberTriviaRestAPI
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.platform.NetworkInfo
 import javax.inject.Singleton
 
 /**
@@ -21,11 +28,11 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://numbersapi.com/")
             .client(createClient())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
@@ -38,5 +45,24 @@ class ApplicationModule {
         }
         return okHttpClientBuilder.build()
     }
+
+    @Provides
+    @Singleton
+    fun provideNumberTriviaRestAPI(retrofit: Retrofit): NumberTriviaRestAPI {
+        return retrofit.create(NumberTriviaRestAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkInfo(@ApplicationContext context: Context): NetworkInfo = NetworkInfo(context)
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder().create()
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences("trivia_pref", Context.MODE_PRIVATE)
 
 }
