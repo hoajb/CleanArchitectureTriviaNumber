@@ -8,6 +8,8 @@ plugins {
 
 android {
     compileSdk 30
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "vn.hoanguyen.cleanarchitecture.trivianumber"
@@ -32,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {

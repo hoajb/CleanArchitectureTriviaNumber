@@ -1,11 +1,23 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.presentation.NumberTriviaActivity
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.extension.safeClick
+import vn.hoanguyen.cleanarchitecture.trivianumber.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+
+        viewBinding.text.safeClick {
+            Intent(this, NumberTriviaActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 }

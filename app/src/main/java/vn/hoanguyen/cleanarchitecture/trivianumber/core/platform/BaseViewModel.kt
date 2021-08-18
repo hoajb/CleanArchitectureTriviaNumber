@@ -1,7 +1,6 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber.core.platform
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +10,7 @@ import timber.log.Timber
 /**
  * Created by Hoa Nguyen on Aug 14 2021.
  */
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
+abstract class BaseViewModel : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -23,6 +22,12 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         Timber.i("loading $isLoading")
         viewModelScope.launch {
             _isLoading.emit(isLoading)
+        }
+    }
+
+    protected fun notify(message: String) {
+        viewModelScope.launch {
+            _notify.emit(message)
         }
     }
 
@@ -44,8 +49,6 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     protected fun handleErrorDefault(t: Throwable) {
         Timber.i("Error: ${t.message}")
-        viewModelScope.launch {
-            _notify.emit(t.message.orEmpty().ifEmpty { "Unknown" })
-        }
+        notify(t.message.orEmpty().ifEmpty { "Unknown" })
     }
 }

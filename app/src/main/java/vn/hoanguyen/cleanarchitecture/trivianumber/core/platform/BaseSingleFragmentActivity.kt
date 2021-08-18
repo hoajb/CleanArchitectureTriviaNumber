@@ -1,6 +1,7 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber.core.platform
 
 import android.os.Bundle
+import android.view.MenuItem
 import vn.hoanguyen.cleanarchitecture.trivianumber.R
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.extension.inTransaction
 
@@ -25,4 +26,22 @@ abstract class BaseSingleFragmentActivity :
                 createFragment()
             )
         }
+
+    protected fun setupToolbar(title: String) {
+        supportActionBar?.apply {
+            setTitle(title.ifEmpty { getString(R.string.app_name) })
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

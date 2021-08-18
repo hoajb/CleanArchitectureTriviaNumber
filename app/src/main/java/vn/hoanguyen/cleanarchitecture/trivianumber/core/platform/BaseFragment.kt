@@ -1,10 +1,10 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber.core.platform
 
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import timber.log.Timber
 import vn.hoanguyen.cleanarchitecture.trivianumber.R
 
 /**
@@ -14,13 +14,14 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected abstract val viewModel: BaseViewModel
 
-    internal fun notify(@StringRes message: Int) {
+    internal fun notify(message: String) {
+        Timber.d("[notify]: message")
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
     }
 
     internal fun notifyWithAction(
-        @StringRes message: Int,
-        @StringRes actionText: Int,
+        message: String,
+        actionText: String,
         action: () -> Unit
     ) {
         view?.let {
