@@ -25,7 +25,7 @@ internal class NumberTriviaRemoteDataSourceImplTest {
 
     @Test
     fun getConcreteNumberTrivia() = runBlockingTest {
-        val tNumber = 19.0
+        val tNumber = 19
         dataSource.getConcreteNumberTrivia(tNumber)
         coVerify { api.getConcreteNumberTrivia(tNumber) }
     }

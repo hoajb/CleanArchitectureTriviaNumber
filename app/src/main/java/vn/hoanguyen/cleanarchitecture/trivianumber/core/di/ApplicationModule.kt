@@ -1,6 +1,5 @@
 package vn.hoanguyen.cleanarchitecture.trivianumber.core.di
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
@@ -16,6 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import vn.hoanguyen.cleanarchitecture.trivianumber.BuildConfig
 import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.data.datasources.NumberTriviaRestAPI
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.DefaultDispatcherProvider
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.DispatcherProvider
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.platform.NetworkInfo
 import javax.inject.Singleton
 
@@ -65,5 +66,10 @@ class ApplicationModule {
     @Singleton
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
         context.getSharedPreferences("trivia_pref", Context.MODE_PRIVATE)
+
+    @Provides
+    @Singleton
+    fun provideDispatcherProvider(dispatcherProvider: DefaultDispatcherProvider): DispatcherProvider =
+        dispatcherProvider
 
 }

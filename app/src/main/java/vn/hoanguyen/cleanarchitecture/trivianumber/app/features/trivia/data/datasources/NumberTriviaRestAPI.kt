@@ -10,7 +10,7 @@ import vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.data.mode
 interface NumberTriviaRestAPI {
 
     @GET ("{number}?json")
-    suspend fun getConcreteNumberTrivia(@Path("number") number: Double): NumberTriviaDto
+    suspend fun getConcreteNumberTrivia(@Path("number") number: Int): NumberTriviaDto
 
     @GET ("random/trivia?json")
     suspend fun getRandomNumberTrivia(): NumberTriviaDto

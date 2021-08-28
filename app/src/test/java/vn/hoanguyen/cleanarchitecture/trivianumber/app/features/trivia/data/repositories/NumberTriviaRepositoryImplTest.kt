@@ -44,7 +44,7 @@ internal class NumberTriviaRepositoryImplTest {
 
     @Nested
     inner class GetConcreteNumberTrivia {
-        private val tNumber = 1.0
+        private val tNumber = 1
 
         @Test
         fun `should check if the device is online`() = runBlockingTest {
@@ -66,10 +66,10 @@ internal class NumberTriviaRepositoryImplTest {
             every { networkInfo.isNetworkAvailable() } returns true
         }
 
-        private val tNumber = 1.0
+        private val tNumber = 1
         private val tNumberTriviaDto = NumberTriviaDto(
             text = "Number Test",
-            number = tNumber,
+            number = tNumber.toDouble(),
             found = true,
             type = "trivia"
         )
@@ -120,10 +120,10 @@ internal class NumberTriviaRepositoryImplTest {
             every { networkInfo.isNetworkAvailable() } returns false
         }
 
-        private val tNumber = 1.0
+        private val tNumber = 1
         private val tNumberTriviaDto = NumberTriviaDto(
             text = "Number Test",
-            number = tNumber,
+            number = tNumber.toDouble(),
             found = true,
             type = "trivia"
         )

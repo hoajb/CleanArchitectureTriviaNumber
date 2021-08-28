@@ -13,7 +13,7 @@ import javax.inject.Inject
 class UseCaseGetConcreteNumberTrivia @Inject constructor(
     private val numberTriviaRepository: NumberTriviaRepository,
 ) : UseCase<NumberTrivia, UseCaseGetConcreteNumberTrivia.Params>() {
-    data class Params(val number: Double)
+    data class Params(val number: Int)
 
     override suspend fun run(params: Params): Either<IFailure, NumberTrivia> {
         return numberTriviaRepository.getConcreteNumberTrivia(params.number)

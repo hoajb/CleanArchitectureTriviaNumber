@@ -2,6 +2,7 @@ package vn.hoanguyen.cleanarchitecture.trivianumber.app.features.trivia.presenta
 
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
+import vn.hoanguyen.cleanarchitecture.trivianumber.R
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.platform.BaseFragment
 import vn.hoanguyen.cleanarchitecture.trivianumber.core.platform.BaseSingleFragmentActivity
 
@@ -14,6 +15,6 @@ class NumberTriviaActivity : BaseSingleFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupToolbar("Number Trivia by Input")
+        setupToolbar(getString(R.string.by_input))
     }
 }

@@ -36,10 +36,10 @@ internal class NumberTriviaLocalSharePreferencesDataSourceImplTest {
         fun `should return local number trivia when it is present in share preferences`() =
             runBlockingTest {
                 //Arrange
-                val tNumber = 1.0
+                val tNumber = 1
                 val tNumberTriviaDto = NumberTriviaDto(
                     text = "Number Test",
-                    number = tNumber,
+                    number = tNumber.toDouble(),
                     found = true,
                     type = "trivia"
                 )
@@ -76,7 +76,7 @@ internal class NumberTriviaLocalSharePreferencesDataSourceImplTest {
         @Test
         fun `should throws CachedException when it is NOT present in share preferences`() {
             //Arrange
-            val tNumber = 1.0
+            val tNumber = 1
 
             every { sharedPreferences.getString(any(), any()) } returns String.empty()
             every {
@@ -100,10 +100,10 @@ internal class NumberTriviaLocalSharePreferencesDataSourceImplTest {
         fun `should call share preferences to save number trivia`() =
             runBlockingTest {
                 //Arrange
-                val tNumber = 1.0
+                val tNumber = 1
                 val tNumberTriviaDto = NumberTriviaDto(
                     text = "Number Test",
-                    number = tNumber,
+                    number = tNumber.toDouble(),
                     found = true,
                     type = "trivia"
                 )

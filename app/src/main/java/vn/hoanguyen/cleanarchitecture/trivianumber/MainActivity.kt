@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         val viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        viewBinding.text.safeClick {
+        viewBinding.buttonByInput.safeClick {
             Intent(this, NumberTriviaActivity::class.java).apply {
                 startActivity(this)
             }

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class NumberTriviaRemoteDataSourceImpl @Inject constructor(
     private val api: NumberTriviaRestAPI
 ) : NumberTriviaRemoteDataSource {
-    override suspend fun getConcreteNumberTrivia(number: Double): NumberTriviaDto =
+    override suspend fun getConcreteNumberTrivia(number: Int): NumberTriviaDto =
         api.getConcreteNumberTrivia(number)
 
     override suspend fun getRandomNumberTrivia(): NumberTriviaDto =

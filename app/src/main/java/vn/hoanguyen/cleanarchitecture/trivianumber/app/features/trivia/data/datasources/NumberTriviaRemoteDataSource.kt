@@ -10,7 +10,7 @@ interface NumberTriviaRemoteDataSource {
      * Call the api http://numbersapi.com/{number}?json
      * Throws a [ServerException] for all error code
      */
-    suspend fun getConcreteNumberTrivia(number: Double): NumberTriviaDto
+    suspend fun getConcreteNumberTrivia(number: Int): NumberTriviaDto
 
     /**
      * Call the api http://numbersapi.com/random/trivia?json

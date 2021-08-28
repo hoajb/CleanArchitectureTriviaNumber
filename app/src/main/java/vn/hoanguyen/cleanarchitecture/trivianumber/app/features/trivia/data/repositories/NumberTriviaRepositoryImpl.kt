@@ -19,7 +19,7 @@ class NumberTriviaRepositoryImpl @Inject constructor(
     private val localDataSource: NumberTriviaLocalDataSource,
     private val networkInfo: NetworkInfo
 ) : NumberTriviaRepository {
-    override suspend fun getConcreteNumberTrivia(number: Double): Either<IFailure, NumberTrivia> {
+    override suspend fun getConcreteNumberTrivia(number: Int): Either<IFailure, NumberTrivia> {
         if (networkInfo.isNetworkAvailable().not()) {
             return try {
                 val localResult = localDataSource.getConcreteNumberTrivia(number)

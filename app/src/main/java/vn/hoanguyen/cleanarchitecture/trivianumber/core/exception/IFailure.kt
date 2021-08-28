@@ -17,5 +17,5 @@ sealed class IFailure {
 
     data class ServerFailure(val messageError: String = "") : IFailure()
 
-    object CacheFailure : IFailure()
+    object CacheFailure : FeatureFailure()
 }

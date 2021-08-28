@@ -2,4 +2,6 @@
     <string name="app_name">CleanArchitectureTriviaNumber</string>
     <string name="button_submit">Submit</string>
     <string name="input_number_trivia">Input your number</string>
+    <string name="by_input">Number Trivia by Input</string>
+    <string name="by_random">Number Trivia by Random</string>
 </resources>

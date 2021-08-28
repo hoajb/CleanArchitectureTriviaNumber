@@ -2,6 +2,7 @@ package vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
 /**
  * Created by Hoa Nguyen on Aug 08 2021.
@@ -15,4 +16,4 @@ interface DispatcherProvider {
 
 }
 
-class DefaultDispatcherProvider : DispatcherProvider
+class DefaultDispatcherProvider @Inject constructor() : DispatcherProvider

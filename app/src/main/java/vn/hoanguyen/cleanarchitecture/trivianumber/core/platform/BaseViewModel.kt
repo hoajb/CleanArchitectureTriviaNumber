@@ -6,11 +6,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.exception.IFailure
+import vn.hoanguyen.cleanarchitecture.trivianumber.core.interactor.DispatcherProvider
 
 /**
  * Created by Hoa Nguyen on Aug 14 2021.
  */
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel(private val dispatcherProvider: DispatcherProvider) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -18,15 +20,21 @@ abstract class BaseViewModel : ViewModel() {
     private val _notify = MutableStateFlow("")
     val notify: StateFlow<String> = _notify
 
+    protected fun scopeLaunch(body: suspend () -> Unit) {
+        viewModelScope.launch(dispatcherProvider.io()) {
+            body.invoke()
+        }
+    }
+
     protected fun loading(isLoading: Boolean) {
         Timber.i("loading $isLoading")
-        viewModelScope.launch {
+        scopeLaunch {
             _isLoading.emit(isLoading)
         }
     }
 
     protected fun notify(message: String) {
-        viewModelScope.launch {
+        scopeLaunch {
             _notify.emit(message)
         }
     }
@@ -47,8 +55,25 @@ abstract class BaseViewModel : ViewModel() {
             loading(false)
     }
 
-    protected fun handleErrorDefault(t: Throwable) {
+    open fun handleErrorDefault(t: Throwable) {
         Timber.i("Error: ${t.message}")
         notify(t.message.orEmpty().ifEmpty { "Unknown" })
+    }
+
+    protected fun iFailureHandler(iFailure: IFailure): Boolean {
+        return when (iFailure) {
+            is IFailure.NetworkConnectionFailure -> {
+                notify("No Internet Connection!!!")
+                true
+            }
+
+            is IFailure.ServerFailure -> {
+                notify("[Server Error] : ${iFailure.messageError}")
+                true
+            }
+            else -> {
+                false
+            }
+        }
     }
 }

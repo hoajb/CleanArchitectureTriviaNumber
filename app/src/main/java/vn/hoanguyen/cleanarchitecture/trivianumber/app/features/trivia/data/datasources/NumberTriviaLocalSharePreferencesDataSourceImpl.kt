@@ -15,7 +15,7 @@ class NumberTriviaLocalSharePreferencesDataSourceImpl @Inject constructor(
     private val sharePreferences: SharedPreferences,
     private val gson: Gson
 ) : NumberTriviaLocalDataSource {
-    override suspend fun getConcreteNumberTrivia(number: Double): NumberTriviaDto {
+    override suspend fun getConcreteNumberTrivia(number: Int): NumberTriviaDto {
         val jsonString =
             sharePreferences.getString(NUMBER_TRIVIA_LOCAL_PREF_KEY, String.empty()).orEmpty()
 
