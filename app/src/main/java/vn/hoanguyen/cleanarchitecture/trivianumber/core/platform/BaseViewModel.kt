@@ -60,19 +60,17 @@ abstract class BaseViewModel(private val dispatcherProvider: DispatcherProvider)
         notify(t.message.orEmpty().ifEmpty { "Unknown" })
     }
 
-    protected fun iFailureHandler(iFailure: IFailure): Boolean {
+    protected fun iFailureHandler(iFailure: IFailure) {
         return when (iFailure) {
             is IFailure.NetworkConnectionFailure -> {
                 notify("No Internet Connection!!!")
-                true
             }
 
             is IFailure.ServerFailure -> {
                 notify("[Server Error] : ${iFailure.messageError}")
-                true
             }
             else -> {
-                false
+                notify("[Unknown Error]")
             }
         }
     }

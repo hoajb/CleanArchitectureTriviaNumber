@@ -11,8 +11,14 @@ data class NumberTrivia(
     val number: Double,
     val found: Boolean,
     val type: String,
-)
 
-fun NumberTrivia.empty(): NumberTrivia = NumberTrivia(String.empty(), 0.0, false, String.empty())
-fun NumberTrivia.isEmpty(): Boolean =
-    this.text == String.empty() && this.number == 0.0 && !this.found && this.type == String.empty()
+    ) {
+    companion object {
+        fun empty(): NumberTrivia = NumberTrivia(String.empty(), 0.0, false, String.empty())
+    }
+
+    fun isEmpty(): Boolean =
+        this.text == String.empty() && this.number == 0.0 && !this.found && this.type == String.empty()
+}
+
+
